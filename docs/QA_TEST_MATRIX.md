@@ -8,3 +8,5 @@
 | TC-02 | Department/Role | Blank input (`""`) | Handles gracefully without crash | | |
 | TC-03 | Email / Contact | Valid string (`"test@bch.org"`) | Stored & printed accurately | | |
 | TC-04 | Badge Tier | Lowercase text (`"vip"`) | Clean output on badge | | |
+| TC-05 | Text Box | Text too long | Make text box longer | | |
+
