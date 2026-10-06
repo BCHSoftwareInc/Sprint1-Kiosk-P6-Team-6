@@ -41,19 +41,19 @@ def test_q6_age13_without_guardian_is_granted():
 # ---------- Ticket types ----------
 def test_q7_vip_normal_rider_gets_vip_lane():
     # TODO (Q7): ticket "VIP", height 60, age 30, guardian False  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+    assert check_entry("VIP", 60, 30, False) == "GRANTED_VIP"
 
 def test_q8_unauthorized_is_denied():
     # TODO (Q8): ticket "UNAUTHORIZED", height 60, age 30, guardian False  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+    assert check_entry("UNAUTHORIZED", 60, 30, False) == "DENIED_NO_TICKET"
 
 def test_q9_top_of_valid_range_is_granted():
     # TODO (Q9): ticket "PATRON", height 96, age 120, guardian False  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+    assert check_entry("PATRON", 96, 120, False) == "GRANTED"
 
 def test_q10_vip_child_with_guardian_gets_vip_lane():
     # TODO (Q10): ticket "VIP", height 60, age 12, guardian True  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+    assert check_entry("VIP", 60, 12, True) == "GRANTED_VIP"
 
 # ---------- Analytics counters (runs once SE finishes Story 2) ----------
 def test_q11_new_gate_starts_at_zero():
