@@ -25,29 +25,23 @@ VALID_TICKETS = ("PATRON", "VIP")
 def check_entry(ticket_type, height_in, age, has_guardian):
     # Check the rules IN THIS ORDER. The first rule that matches wins - return right away.
 
-    # TODO Rule 1: if ticket_type is not one of VALID_TICKETS -> return "DENIED_NO_TICKET"
-    if ticket_type  not in VALID_TICKETS:
+   # Rule 1: Check if ticket_type is valid. Only return if INVALID.
+    if ticket_type not in VALID_TICKETS:
         return "DENIED_NO_TICKET"
         
-
-    # TODO Rule 2: if height_in <= 0, or height_in > MAX_HEIGHT_IN,
-    #              or age < 0, or age > MAX_AGE           -> return "DENIED_INVALID"
-
+    # Rule 2: Check for physically impossible/invalid scans
     if height_in <= 0 or height_in > MAX_HEIGHT_IN or age < 0 or age > MAX_AGE:
         return "DENIED_INVALID"
-
-    # TODO Rule 3: if height_in < MIN_HEIGHT_IN            -> return "DENIED_TOO_SHORT"
-    #              (VIPs are NOT exempt - this is a physical safety rule)
-
+        
+    # Rule 3: Physical safety height restriction (applies to VIPs too)
     if height_in < MIN_HEIGHT_IN:
         return "DENIED_TOO_SHORT"
-
-    # TODO Rule 4: if age < MIN_SOLO_AGE AND there is no guardian -> return "DENIED_NEEDS_GUARDIAN"
-    if age < MIN_SOLO_AGE and has_guardian == False:
+        
+    # Rule 4: Age restrictions and chaperone requirements
+    if age < MIN_SOLO_AGE and not has_guardian:
         return "DENIED_NEEDS_GUARDIAN"
-
-    # TODO Rule 5: if ticket_type is "VIP" -> return "GRANTED_VIP", otherwise return "GRANTED"
-
+        
+    # Rule 5: Ticket routing (VIP vs Standard Patron)
     if ticket_type == "VIP":
         return "GRANTED_VIP"
     else:
