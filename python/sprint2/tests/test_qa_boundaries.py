@@ -21,22 +21,21 @@ def test_q2_patron47point9_inches_is_too_short():
     assert check_entry("PATRON", 47.9, 30, False) == "DENIED_TOO_SHORT"
 
 def test_q3_patron48point1_inches_is_granted():
-    # TODO (Q3): ticket "PATRON", height 48.1, age 30, guardian False  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+    assert check_entry("PATRON", 48.1, 30, False) == "GRANTED"
 
 
 # ---------- Age boundary (13) ----------
 def test_q4_age12_without_guardian_needs_guardian():
     # TODO (Q4): ticket "PATRON", height 60, age 12, guardian False  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+     assert check_entry("PATRON", 60, 12, False) == "DENIED_NEEDS_GUARDIAN"
 
 def test_q5_age12_with_guardian_is_granted():
     # TODO (Q5): ticket "PATRON", height 60, age 12, guardian True  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+    assert check_entry("PATRON", 60, 12, True) == "GRANTED"
 
 def test_q6_age13_without_guardian_is_granted():
     # TODO (Q6): ticket "PATRON", height 60, age 13, guardian False  ->  expect ??? (look it up in the Rules table)
-    pytest.skip("TODO - write this test")
+    assert check_entry("PATRON", 60, 13, False) == "GRANTED"
 
 
 # ---------- Ticket types ----------
