@@ -8,27 +8,32 @@ from gate_rules import check_entry, is_granted
 
 
 class TurnstileGate:
-    def __init__(self):
-        self.granted_count = 0
-        self.denied_count = 0
+   def __init__(self):
+        self._granted_count = 0
+        self._denied_count = 0
 
-        #scans for granted and denied entries
-    def scan(self, ticket_type, height_in, age, has_guardian):
-
-
-        #adds 1 to granted or denied count based on the result of check_entry
+   def scan(self, ticket_type, height_in, age, has_guardian):
+        # Get the decision from the rules engine
         result = check_entry(ticket_type, height_in, age, has_guardian)
-        if is_granted(result):
-            self.granted_count += 1
-        else:
-            self.denied_count += 1
 
+        # Update the appropriate counter
+        if is_granted(result):
+            self._granted_count += 1
+        else:
+            self._denied_count += 1
 
         return result
 
-    def total_scans(self):
+   def granted_count(self):
+        return self._granted_count
+
+   def denied_count(self):
+        return self._denied_count
+
+   def total_scans(self):
+        return self._granted_count + self._denied_count
+
+   def total_scans(self):
         # TODO: return granted + denied
         
-        total_ordering = self.granted_count + self.denied_count
-
-        return total_ordering
+        return self._denied_count + self._granted_count
